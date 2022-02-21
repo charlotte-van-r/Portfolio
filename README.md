@@ -1,5 +1,15 @@
 # Portfolio
 
+
+## Update 21/02/2022: Last minute, I decided to change my topic, so this description and the plot aren't so extensive.
+I decided I want to research music labelled as 'emo'. This genre was first recognized in the late 80s of the last century (it originated from the hardcorepunk scene in Washington DC), but it is still a popular genre today. Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.) and are differentiated mostly in terms of loudness. Especially the first wave is being known for being very 'loud'.
+In the plot I have added to my portfolio, you can see data points of all songs I have in my corpus so far, with release year on the x-axis and loudness on the y-axis. Color coded is the wave to which the song belongs (or is assigned to by the creator of the playlists I used to gather my data). As you can see, the mean release year is neatly parallel to the waves distinguished. You can also see that the songs in wave 1 are overall louder than songs of the other three waves. I still have to conduct statistical testing to see whether there is an actual difference.
+
+
+-----------------------------------------------------------
+
+
+First idea:
 For my portfolio, I want to look at my own taste in music, and how this has developed over the past 10 years. Ever since the end of 2009, my listening habits have been tracked by last.fm, an application that registers every song ('a scrobble') you listen to on certain platforms, such as Spotify. Even though last.fm can't track the music one listens to from for example YouTube, I still think that their records on my music listening habits will be representative, as most music I have listened to has been 'scrobbled' by Last.fm, in the early 2010s on iTunes, and later on Spotify. 
 
 The plan for my corpus is as follows:
