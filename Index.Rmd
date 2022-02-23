@@ -57,7 +57,7 @@ wave4$wave <- "wave4"
 wave1234 <- rbind(wave1, wave2, wave3, wave4)
 
 # give column names of 'wave1234', to inspect which are unnecessary and can be removed
-# names(wave1234)
+names(wave1234)
 
 # remove useless columns
 wave1234subset <- wave1234
