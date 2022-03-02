@@ -1,5 +1,5 @@
 ---
-title: "Portfolio v1"
+title: "Riding the waves of emo "
 output: 
     flexdashboard::flex_dashboard:
         orientation: columns
@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-## Including Plots
+## Let's try a plot
 
 A first plot:
 
@@ -29,10 +29,10 @@ library(remotes)
 library(usethis)
 library(ggplot2)
 
-Sys.setenv(SPOTIFY_CLIENT_ID = '7fbf524d5db54f65a16d5c4773753068')
-Sys.setenv(SPOTIFY_CLIENT_SECRET = 'afed2c21916d41ffb1ab9b9b3ce766f1')
+#Sys.setenv(SPOTIFY_CLIENT_ID = '7fbf524d5db54f65a16d5c4773753068')
+#Sys.setenv(SPOTIFY_CLIENT_SECRET = 'afed2c21916d41ffb1ab9b9b3ce766f1')
 
-access_token <- get_spotify_access_token()
+#access_token <- get_spotify_access_token()
 
 wave1 <- get_playlist_audio_features("", "1rcC4T1SuhqqTLw2j5KBEI")
 wave2 <- get_playlist_audio_features("", "0x1XvxGALr0yY7lKos4Kg2")
@@ -63,7 +63,7 @@ wave4$wave <- "wave4"
 wave1234 <- rbind(wave1, wave2, wave3, wave4)
 
 # give column names of 'wave1234', to inspect which are unnecessary and can be removed
-names(wave1234)
+# names(wave1234)
 
 # remove useless columns
 wave1234subset <- wave1234
