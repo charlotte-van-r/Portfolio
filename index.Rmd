@@ -14,8 +14,11 @@ knitr::opts_chunk$set(echo = FALSE)
 Introduction to emo music
 =================================================
 
-I decided I want to research music labelled as 'emo'. This genre was first recognized in the late 80s of the last century (it originated from the hardcorepunk scene in Washington DC), but it is still a popular genre today. Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.) and are differentiated mostly in terms of loudness. Especially the first wave is being known for being very 'loud'.
+In my portfolio, I will dive into the world of the genre 'emo'. Many of us might associate the word 'emo' with the subculture: youngsters with black eyeliner, straightened hair and very, very skinny jeans. As with many subcultures, the music came first. The genre of emo originated from the hardcorepunk scene in Washington DC, and was first recognized as its own genre in the late 80s of the last century. To this day, it is a popular genre. This might be due to the fact that the genre has transformed over the years (or so people say). Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.). These waves are differentiated mostly in terms of loudness. Especially the first wave is known for being very 'loud'.
 
+<br>
+
+This portfolio will revolve around the musical similarities and differences of these four waves. Do these waves actually differ in their musical features? Or is it all more of the same? In order to research this, my corpus will include four playlists created by Michelle Bruton (Spotify name 'Michellewithonel'), a journalist who wrote an [extensive blog on the waves of emo](https://fansided.com/2018/08/15/fourth-wave-emo-revival-bands-tours-definition-music-songs/) in 2018. These playlists are aptly named 'Emo: the first wave' (12 songs), 'Emo: the second wave' (38 songs), 'Emo: the third wave' (33 songs), and 'Emo: the fourth wave' (39 songs).
 
 
 
