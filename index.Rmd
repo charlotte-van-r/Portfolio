@@ -4,7 +4,6 @@ subtitle: "An investigation of the four waves of emo"
 author: "Charlotte van Roijen, 10787585, University of Amsterdam"
 output: 
     flexdashboard::flex_dashboard:
-        orientation: columns
         vertical_layout: scroll
         storyboard: true
         self_contained: false
@@ -29,8 +28,9 @@ In my portfolio, I will dive into the world of the genre 'emo'. Many of us might
 
 This portfolio will revolve around the musical similarities and differences of these four waves. Do these waves actually differ in their musical features? Or is it all more of the same? In order to research this, my corpus will include four playlists created by Michelle Bruton (Spotify user 'Michellewithonel'), a journalist who wrote an [extensive blog on the waves of emo](https://fansided.com/2018/08/15/fourth-wave-emo-revival-bands-tours-definition-music-songs/) in 2018. These playlists are aptly named 'Emo: the first wave' (12 songs), 'Emo: the second wave' (38 songs), 'Emo: the third wave' (33 songs), and 'Emo: the fourth wave' (39 songs).
 
+***
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="50%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 PLS give me a plot
 ===================================
@@ -104,5 +104,7 @@ ggplot(wave1234subset, aes(x = release_year, y = loudness, color = wave)) +
     scale_color_discrete("wave") +
     geom_point(data = wave1234subset.summary, shape = 15, size = 5)
 ```
+
 ***
+
 In the plot I have added to my portfolio, you can see data points of all songs I have in my corpus so far, with release year on the x-axis and loudness on the y-axis. Color coded is the wave to which the song belongs (or is assigned to by the creator of the playlists I used to gather my data). As you can see, the mean release year is neatly parallel to the waves distinguished. You can also see that the songs in wave 1 are overall louder than songs of the other three waves. I still have to conduct statistical testing to see whether there is an actual difference.
