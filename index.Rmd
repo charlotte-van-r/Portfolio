@@ -4,7 +4,6 @@ subtitle: "An investigation of the four waves of emo"
 author: "Charlotte van Roijen, 10787585, University of Amsterdam"
 output: 
     flexdashboard::flex_dashboard:
-        vertical_layout: scroll
         storyboard: true
 ---
 ```{r setup, include=FALSE}
@@ -18,8 +17,7 @@ library(usethis)
 library(ggplot2)
 ```
 
-Introduction to emo music
-=====================================
+### Introduction to emo music
 
 In my portfolio, I will dive into the world of the genre 'emo'. Many of us might associate the word 'emo' with the subculture: youngsters with black eyeliner, straightened hair and very, very skinny jeans. As with many subcultures, the music came first. The genre of emo originated from the hardcorepunk scene in Washington DC, and was first recognized as its own genre in the late 80s of the last century. To this day, it is a popular genre. This might be due to the fact that the genre has transformed over the years (or so people say). Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.). These waves are differentiated mostly in terms of loudness. Especially the first wave is known for being very 'loud'.
 
@@ -31,17 +29,12 @@ This portfolio will revolve around the musical similarities and differences of t
 
 help
 
-PLS give me a plot
-===================================
-## Let's try a plot
+### PLS give me a plot
+
+#### Let's try a plot
 
 A first plot:
 ```{r, echo=FALSE}
-Sys.setenv(SPOTIFY_CLIENT_ID = '7fbf524d5db54f65a16d5c4773753068')
-Sys.setenv(SPOTIFY_CLIENT_SECRET = 'afed2c21916d41ffb1ab9b9b3ce766f1')
-
-access_token <- get_spotify_access_token()
-
 wave1 <- get_playlist_audio_features("", "1rcC4T1SuhqqTLw2j5KBEI")
 wave2 <- get_playlist_audio_features("", "0x1XvxGALr0yY7lKos4Kg2")
 wave3 <- get_playlist_audio_features("", "0k613TUDZYkomz97xX9DeZ")
