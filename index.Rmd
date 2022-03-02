@@ -1,47 +1,44 @@
 ---
-title: "Riding the waves of emo "
+title: "Riding the waves of emo"
+subtitle: "An investigation of the four waves of emo"
+author: "Charlotte van Roijen, 10787585, University of Amsterdam"
 output: 
     flexdashboard::flex_dashboard:
         orientation: columns
         vertical_layout: scroll
         storyboard: true
+        self_contained: false
 ---
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(plotly)
+library(spotifyr)
+#library(compmus)
+library(remotes)
+library(usethis)
+library(ggplot2)
 ```
 
 Introduction to emo music
-=================================================
+=====================================
 
 In my portfolio, I will dive into the world of the genre 'emo'. Many of us might associate the word 'emo' with the subculture: youngsters with black eyeliner, straightened hair and very, very skinny jeans. As with many subcultures, the music came first. The genre of emo originated from the hardcorepunk scene in Washington DC, and was first recognized as its own genre in the late 80s of the last century. To this day, it is a popular genre. This might be due to the fact that the genre has transformed over the years (or so people say). Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.). These waves are differentiated mostly in terms of loudness. Especially the first wave is known for being very 'loud'.
 
 <br>
 
-This portfolio will revolve around the musical similarities and differences of these four waves. Do these waves actually differ in their musical features? Or is it all more of the same? In order to research this, my corpus will include four playlists created by Michelle Bruton (Spotify name 'Michellewithonel'), a journalist who wrote an [extensive blog on the waves of emo](https://fansided.com/2018/08/15/fourth-wave-emo-revival-bands-tours-definition-music-songs/) in 2018. These playlists are aptly named 'Emo: the first wave' (12 songs), 'Emo: the second wave' (38 songs), 'Emo: the third wave' (33 songs), and 'Emo: the fourth wave' (39 songs).
+This portfolio will revolve around the musical similarities and differences of these four waves. Do these waves actually differ in their musical features? Or is it all more of the same? In order to research this, my corpus will include four playlists created by Michelle Bruton (Spotify user 'Michellewithonel'), a journalist who wrote an [extensive blog on the waves of emo](https://fansided.com/2018/08/15/fourth-wave-emo-revival-bands-tours-definition-music-songs/) in 2018. These playlists are aptly named 'Emo: the first wave' (12 songs), 'Emo: the second wave' (38 songs), 'Emo: the third wave' (33 songs), and 'Emo: the fourth wave' (39 songs).
 
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="40%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+why is there no playlist?
 
 
 PLS give me a plot
-=================================================
-### what does this do?
+===================================
 ## Let's try a plot
 
 A first plot:
-
-```{r, fig.width = 10, fig.height = 5, echo=FALSE}
-#install.packages("tidyverse")
-#install.packages("spotifyr")
-#install.packages("remotes")
-#install.packages("usethis")
-#install.packages("ggplot2")
-
-library(tidyverse)
-library(spotifyr)
-library(remotes)
-library(usethis)
-library(ggplot2)
-
+```{r, echo=FALSE}
 Sys.setenv(SPOTIFY_CLIENT_ID = '7fbf524d5db54f65a16d5c4773753068')
 Sys.setenv(SPOTIFY_CLIENT_SECRET = 'afed2c21916d41ffb1ab9b9b3ce766f1')
 
@@ -109,6 +106,4 @@ ggplot(wave1234subset, aes(x = release_year, y = loudness, color = wave)) +
     geom_point(data = wave1234subset.summary, shape = 15, size = 5)
 ```
 ***
-This is my commentary to the plot on the left.
-
 In the plot I have added to my portfolio, you can see data points of all songs I have in my corpus so far, with release year on the x-axis and loudness on the y-axis. Color coded is the wave to which the song belongs (or is assigned to by the creator of the playlists I used to gather my data). As you can see, the mean release year is neatly parallel to the waves distinguished. You can also see that the songs in wave 1 are overall louder than songs of the other three waves. I still have to conduct statistical testing to see whether there is an actual difference.
