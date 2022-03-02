@@ -16,12 +16,23 @@ knitr::opts_chunk$set(echo = FALSE)
 
 You can also embed plots, for example:
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE}
+# install.packages("tidyverse")
+# install.packages("spotifyr")
+# install.packages("remotes")
+# install.packages("usethis")
+# install.packages("ggplot2")
+
 library(tidyverse)
 library(spotifyr)
 library(remotes)
 library(usethis)
 library(ggplot2)
+
+Sys.setenv(SPOTIFY_CLIENT_ID = '7fbf524d5db54f65a16d5c4773753068')
+Sys.setenv(SPOTIFY_CLIENT_SECRET = 'afed2c21916d41ffb1ab9b9b3ce766f1')
+
+access_token <- get_spotify_access_token()
 
 wave1 <- get_playlist_audio_features("", "1rcC4T1SuhqqTLw2j5KBEI")
 wave2 <- get_playlist_audio_features("", "0x1XvxGALr0yY7lKos4Kg2")
