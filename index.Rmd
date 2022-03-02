@@ -6,7 +6,6 @@ output:
     flexdashboard::flex_dashboard:
         vertical_layout: scroll
         storyboard: true
-        self_contained: false
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -30,7 +29,7 @@ This portfolio will revolve around the musical similarities and differences of t
 
 ***
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+help
 
 PLS give me a plot
 ===================================
