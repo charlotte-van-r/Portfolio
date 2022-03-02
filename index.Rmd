@@ -101,3 +101,6 @@ ggplot(wave1234subset, aes(x = release_year, y = loudness, color = wave)) +
 ***
 
 In the plot I have added to my portfolio, you can see data points of all songs I have in my corpus so far, with release year on the x-axis and loudness on the y-axis. Color coded is the wave to which the song belongs (or is assigned to by the creator of the playlists I used to gather my data). As you can see, the mean release year is neatly parallel to the waves distinguished. You can also see that the songs in wave 1 are overall louder than songs of the other three waves. I still have to conduct statistical testing to see whether there is an actual difference.
+
+
+werkt dit??
