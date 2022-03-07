@@ -148,7 +148,7 @@ NeverMeant %>%
 
 #### Self-similarity Matrices
 
-Self-similarity matrix of "Never Meant" by American Football in terms of timbre
+* Self-similarity matrix of "Never Meant" by American Football in terms of timbre
 
 ```{r}
 NeverMeant %>%
@@ -173,7 +173,7 @@ NeverMeant %>%
 There is not a whole lot to say about this self-similarity matrix. The timbre of the song is the same throughout the song. The only notable thing is the song opens with a few seconds of 'jamming', then a few seconds of silence and the count-off on the drums. This has a different timbre than the rest of the song, which can be seen here, because of the difference in colour.
 
 
-Self-similarity matrix of "Never Meant" by American Football in terms of pitch
+* Self-similarity matrix of "Never Meant" by American Football in terms of pitch
 
 
 ```{r}
