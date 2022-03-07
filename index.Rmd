@@ -5,6 +5,8 @@ author: "Charlotte van Roijen, 10787585, University of Amsterdam"
 output: 
     flexdashboard::flex_dashboard:
         storyboard: true
+        self_contained: false
+
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -210,41 +212,32 @@ This portfolio will revolve around the musical similarities and differences of t
 
 ***
 
-* insert 'Emo: the first wave' *
+Playlist 'Emo: the first wave'
 
-```{r}
-# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
-
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
 ***
 
-* insert 'Emo: the second wave' *
+Playlist 'Emo: the second wave'
 
-```{r}
-# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0x1XvxGALr0yY7lKos4Kg2?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0x1XvxGALr0yY7lKos4Kg2?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+
+***
+Playlist 'Emo: the third wave'
+
+
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0k613TUDZYkomz97xX9DeZ?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
 
 
 
 ***
-* insert 'Emo: the third wave' *
+Playlist 'Emo: the fourth wave'
 
-```{r}
-# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0k613TUDZYkomz97xX9DeZ?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
-
-
-
-***
-* insert 'Emo: the fourth wave' *
-
-```{r}
-
-# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3Mck3Ipp6wNmmRgDfYkRza?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-```
-
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3Mck3Ipp6wNmmRgDfYkRza?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
 
 ### PLS give me a plot
