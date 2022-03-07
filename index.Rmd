@@ -16,38 +16,247 @@ library(compmus)
 library(remotes)
 library(usethis)
 library(ggplot2)
+library(knitr)
+library(jpeg)
+library(png)
 ```
+
+### Pitch and Timbre features
+
+#### Chromagram
+
+Chromagram of "Konstantine" by Something Corporate (with Euclidean norm)
+
+```{r}
+# Konstantine by Something Corporate
+Konstantine <-
+  get_tidy_audio_analysis("75CsNDa4ikKu3TyBHMELoM") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+  
+Konstantine %>%
+  mutate(pitches = map(pitches, compmus_normalise, "euclidean")) %>%
+  compmus_gather_chroma() %>% 
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = pitch_class,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  theme_minimal() +
+  scale_fill_viridis_c()
+```
+
+As you can see, a lot of chromas are present that alternate very rapidly. This makes sense as the main body of the song consists or arpeggiated chords on piano. -> needs more explanation.
+
+
+#### Dynamic Time Warping
+
+
+Because there are no two songs in my corpus that are very similar to each other in terms of pitch course (like cover versions), I decided to compare two of the most different songs in my corpus, to see what would happen in dynamic time warping.
+
+As you can see, there is no diagonal blue line that you would usually see if the two songs were similar versions of the same song. -> add more explanation
+
+```{r}
+# For Want Of by Rites of Spring
+RitesOfSpring <-
+  get_tidy_audio_analysis("7mZjpi86XWnEBiu8VMR3GI") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+  
+# Cutting My Fingers Off by Turnover
+Turnover <-
+  get_tidy_audio_analysis("4lRUr1HeCWtCwyHCIfIqTt") %>%
+  select(segments) %>%
+  unnest(segments) %>%
+  select(start, duration, pitches)
+
+
+compmus_long_distance(
+  RitesOfSpring %>% mutate(pitches = map(pitches, compmus_normalise, "chebyshev")),
+  Turnover %>% mutate(pitches = map(pitches, compmus_normalise, "chebyshev")),
+  feature = pitches,
+  method = "euclidean"
+) %>%
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_equal() +
+  labs(x = "'For Want Of' by Rites of Spring", y = "'Cutting My Fingers Off' by Turnover") +
+  theme_minimal() +
+  scale_fill_viridis_c(guide = NULL)
+
+```
+
+#### Cepstrograms
+
+
+Cepstrogram of "Never Meant" by American Football
+
+```{r}
+NeverMeant <-
+  get_tidy_audio_analysis("51R5mPcJjOnfv9lKY1u5sW") %>% # Change URI.
+  compmus_align(bars, segments) %>%                     # Change `bars`
+  select(bars) %>%                                      #   in all three
+  unnest(bars) %>%                                      #   of these lines.
+  mutate(
+    pitches =
+      map(segments,
+        compmus_summarise, pitches,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  ) %>%
+  mutate(
+    timbre =
+      map(segments,
+        compmus_summarise, timbre,
+        method = "rms", norm = "euclidean"              # Change summary & norm.
+      )
+  )
+
+
+NeverMeant %>%
+  compmus_gather_timbre() %>%
+  ggplot(
+    aes(
+      x = start + duration / 2,
+      width = duration,
+      y = basis,
+      fill = value
+    )
+  ) +
+  geom_tile() +
+  labs(x = "Time (s)", y = NULL, fill = "Magnitude") +
+  scale_fill_viridis_c() +                              
+  theme_classic()
+
+```
+
+
+#### Self-similarity Matrices
+
+Self-similarity matrix of "Never Meant" by American Football in terms of timbre
+
+```{r}
+NeverMeant %>%
+  compmus_self_similarity(timbre, "cosine") %>% 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+
+
+There is not a whole lot to say about this self-similarity matrix. The timbre of the song is the same throughout the song. The only notable thing is the song opens with a few seconds of 'jamming', then a few seconds of silence and the count-off on the drums. This has a different timbre than the rest of the song, which can be seen here, because of the difference in colour.
+
+
+Self-similarity matrix of "Never Meant" by American Football in terms of pitch
+
+
+```{r}
+NeverMeant %>%
+  compmus_self_similarity(pitches, "cosine") %>% 
+  ggplot(
+    aes(
+      x = xstart + xduration / 2,
+      width = xduration,
+      y = ystart + yduration / 2,
+      height = yduration,
+      fill = d
+    )
+  ) +
+  geom_tile() +
+  coord_fixed() +
+  scale_fill_viridis_c(guide = "none") +
+  theme_classic() +
+  labs(x = "", y = "")
+```
+This self-similarity matrix, based on pitches, is a lot more interesting. 
+Like in the previous visualisation, you can see that the start of the song is different to the rest of it, also in pitch. There are repeating patterns, that are mainly based on the melody in the guitar that keeps coming back. -> add more explanation.
 
 ### Introduction to emo music
 
-In my portfolio, I will dive into the world of the genre 'emo'. Many of us might associate the word 'emo' with the subculture: youngsters with black eyeliner, straightened hair and very, very skinny jeans. As with many subcultures, the music came first. The genre of emo originated from the hardcorepunk scene in Washington DC, and was first recognized as its own genre in the late 80s of the last century. To this day, it is a popular genre. This might be due to the fact that the genre has transformed over the years (or so people say). Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.). These waves are differentiated mostly in terms of loudness. Especially the first wave is known for being very 'loud'.
+In my portfolio, I will dive into the world of the genre 'emo'. Many of us might associate the word 'emo' with the subculture: youngsters with black eyeliner, straightened hair, and very, very skinny jeans. As with many subcultures, the music came first. The genre of emo originated from the hardcorepunk scene in Washington DC, and was first recognized as its own genre in the late 80s of the last century. To this day, it is a popular genre. This might be due to the fact that the genre has transformed over the years (or so people say). Fans and experts usually distinguish 4 'waves' within emo, which are broadly tied to a specific decade (first wave in the 80s, second wave in the 90s, etc.). These waves are differentiated mostly in terms of loudness. Especially the first wave is known for being very 'loud'.
 
-<br>
+```{r img-with-knitr, echo=FALSE}
+# fig.cap="Rites of Sping, by many seen as the 'first' emo band. Photograph: Bert Queiroz", out.width = '60%'}
+# knitr::include_graphics("imagescompmus/ros.jpeg")
+```
 
-This portfolio will revolve around the musical similarities and differences of these four waves. Do these waves actually differ in their musical features? Or is it all more of the same? In order to research this, my corpus will include four playlists created by Michelle Bruton (Spotify user 'Michellewithonel'), a journalist who wrote an [extensive blog on the waves of emo](https://fansided.com/2018/08/15/fourth-wave-emo-revival-bands-tours-definition-music-songs/) in 2018. These playlists are aptly named 'Emo: the first wave' (12 songs), 'Emo: the second wave' (38 songs), 'Emo: the third wave' (33 songs), and 'Emo: the fourth wave' (39 songs).
+
+This portfolio will revolve around the musical similarities and differences of these four waves. Do these waves actually differ in their musical features? Or is it all more of the same? In order to research this, my corpus will include four playlists created by Michelle Bruton (Spotify user 'Michellewithonel'), a journalist who wrote an [elaborate blog on the waves of emo](https://fansided.com/2018/08/15/fourth-wave-emo-revival-bands-tours-definition-music-songs/) in 2018. These playlists are aptly named 'Emo: the first wave' (12 songs), 'Emo: the second wave' (38 songs), 'Emo: the third wave' (33 songs), and 'Emo: the fourth wave' (39 songs).
 
 ***
 
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="50%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+* insert 'Emo: the first wave' *
+
+```{r}
+# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+```
+
+
+
+***
+
+* insert 'Emo: the second wave' *
+
+```{r}
+# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0x1XvxGALr0yY7lKos4Kg2?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+```
+
+
+
+***
+* insert 'Emo: the third wave' *
+
+```{r}
+# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0k613TUDZYkomz97xX9DeZ?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+```
+
+
+
+***
+* insert 'Emo: the fourth wave' *
+
+```{r}
+
+# <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3Mck3Ipp6wNmmRgDfYkRza?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+```
+
+
 
 ### PLS give me a plot
 
-#### Let's try a plot
 
-A first plot:
+
 ```{r, echo=FALSE}
 wave1 <- get_playlist_audio_features("", "1rcC4T1SuhqqTLw2j5KBEI")
 wave2 <- get_playlist_audio_features("", "0x1XvxGALr0yY7lKos4Kg2")
 wave3 <- get_playlist_audio_features("", "0k613TUDZYkomz97xX9DeZ")
 wave4 <- get_playlist_audio_features("", "3Mck3Ipp6wNmmRgDfYkRza")
-
-## remove day and month from date, just year remains
-
-# make sure the date is indeed a date
-# wave1$track.album.release_date <- as.Date(wave1$track.album.release_date)
-# wave2$track.album.release_date <- as.Date(wave2$track.album.release_date)
-# wave3$track.album.release_date <- as.Date(wave3$track.album.release_date)
-# wave4$track.album.release_date <- as.Date(wave4$track.album.release_date)
 
 # add column with release year of track
 wave1$release_year <- c(1992, 1992, 1983, 1994, 1985, 1985, 1987, 1987, 1995, 1990, 1991, 1991)
@@ -64,9 +273,6 @@ wave4$wave <- "wave4"
 # combine data sets 'wave1', 'wave2', 'wave3', 'wave4'.
 wave1234 <- rbind(wave1, wave2, wave3, wave4)
 
-# give column names of 'wave1234', to inspect which are unnecessary and can be removed
-# names(wave1234)
-
 # remove useless columns
 wave1234subset <- wave1234
 wave1234subset[ ,c(1,2,3,4,5,20,21,22,23,24,25,26,27,30,32,35,39,41,43,51,52,53,58)] <- list(NULL)
@@ -81,12 +287,10 @@ wave1234subset[ ,c(1,2,3,4,5,20,21,22,23,24,25,26,27,30,32,35,39,41,43,51,52,53,
 #mean(wave3$loudness)
 #mean(wave4$loudness)
 
-
 wave1234subset %>%
     group_by(wave) %>%
-    summarise_all(mean) -> wave1234subset.summary
-#wave1234subset.summary # Summary statistics
-
+    summarise_all(mean) -> wave1234subset_summary
+#subset.summary # Summary statistics
 
 # a nice scatterplot of release year X loudness, per wave
 ggplot(wave1234subset, aes(x = release_year, y = loudness, color = wave)) + 
@@ -95,10 +299,13 @@ ggplot(wave1234subset, aes(x = release_year, y = loudness, color = wave)) +
                        limits = c(1980, 2020)) +
     scale_y_continuous("Loudness") +
     scale_color_discrete("wave") +
-    geom_point(data = wave1234subset.summary, shape = 15, size = 5)
+    geom_point(data = wave1234subset_summary, shape = 15, size = 5)
+
 ```
 
 ***
+
+#### Let's try a plot
 
 In the plot I have added to my portfolio, you can see data points of all songs I have in my corpus so far, with release year on the x-axis and loudness on the y-axis. Color coded is the wave to which the song belongs (or is assigned to by the creator of the playlists I used to gather my data). As you can see, the mean release year is neatly parallel to the waves distinguished. You can also see that the songs in wave 1 are overall louder than songs of the other three waves. I still have to conduct statistical testing to see whether there is an actual difference.
 
