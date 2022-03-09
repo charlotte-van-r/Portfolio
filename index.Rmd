@@ -1,3 +1,4 @@
+
 ---
 title: "Riding the waves of emo"
 subtitle: "An investigation of the four waves of emo"
@@ -27,7 +28,7 @@ library(png)
 
 Chromagram of "Konstantine" by Something Corporate (with Euclidean norm)
 
-```{r}
+```{r chromagram}
 # Konstantine by Something Corporate
 Konstantine <-
   get_tidy_audio_analysis("75CsNDa4ikKu3TyBHMELoM") %>%
@@ -62,7 +63,7 @@ Because there are no two songs in my corpus that are very similar to each other 
 
 As you can see, there is no diagonal blue line that you would usually see if the two songs were similar versions of the same song. -> add more explanation
 
-```{r}
+```{r dynamictimewarping}
 # For Want Of by Rites of Spring
 RitesOfSpring <-
   get_tidy_audio_analysis("7mZjpi86XWnEBiu8VMR3GI") %>%
@@ -106,7 +107,7 @@ compmus_long_distance(
 
 Cepstrogram of "Never Meant" by American Football
 
-```{r}
+```{r cepstrogram}
 NeverMeant <-
   get_tidy_audio_analysis("51R5mPcJjOnfv9lKY1u5sW") %>% # Change URI.
   compmus_align(bars, segments) %>%                     # Change `bars`
@@ -150,7 +151,7 @@ NeverMeant %>%
 
 * Self-similarity matrix of "Never Meant" by American Football in terms of timbre
 
-```{r}
+```{r selfsimilaritymatrixtimbre}
 NeverMeant %>%
   compmus_self_similarity(timbre, "cosine") %>% 
   ggplot(
@@ -176,7 +177,7 @@ There is not a whole lot to say about this self-similarity matrix. The timbre of
 * Self-similarity matrix of "Never Meant" by American Football in terms of pitch
 
 
-```{r}
+```{r selfsimilaritymatrixpitch}
 NeverMeant %>%
   compmus_self_similarity(pitches, "cosine") %>% 
   ggplot(
@@ -212,7 +213,7 @@ This portfolio will revolve around the musical similarities and differences of t
 ***
 
 
-```{r}
+```{r playlistwave1}
 # Playlist 'Emo: the first wave'
 
 # <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1rcC4T1SuhqqTLw2j5KBEI?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
@@ -224,7 +225,7 @@ This portfolio will revolve around the musical similarities and differences of t
 
 ***
 
-```{r}
+```{r playlistwave2}
 #Playlist 'Emo: the second wave'
 
 #<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/0x1XvxGALr0yY7lKos4Kg2?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
@@ -237,7 +238,7 @@ This portfolio will revolve around the musical similarities and differences of t
 
 
 ***
-```{r}
+```{r playlistwave3}
 #Playlist 'Emo: the third wave'
 
 
@@ -250,7 +251,7 @@ This portfolio will revolve around the musical similarities and differences of t
 
 
 ***
-```{r}
+```{r playlistwave4}
 #Playlist 'Emo: the fourth wave'
 
 #<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3Mck3Ipp6wNmmRgDfYkRza?utm_source=generator&theme=0" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
@@ -327,7 +328,7 @@ werkt dit??
 
 
 
-```{r}
+```{r corpusfeatures}
 emowave1 <-
     get_playlist_audio_features(
         "Emo: the first wave",
@@ -397,4 +398,3 @@ wavescombi %>%
     alpha = "Volume (dBFS)"
   )
 ```
-
