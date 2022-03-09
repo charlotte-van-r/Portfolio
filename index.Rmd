@@ -323,3 +323,79 @@ In the plot I have added to my portfolio, you can see data points of all songs I
 
 
 werkt dit??
+
+
+
+
+
+```{r}
+emowave1 <-
+    get_playlist_audio_features(
+        "Emo: the first wave",
+        "1rcC4T1SuhqqTLw2j5KBEI"
+    ) %>%
+    slice(1:40) %>%
+    add_audio_analysis()
+
+emowave2 <-
+    get_playlist_audio_features(
+        "Emo: the second wave",
+        "0x1XvxGALr0yY7lKos4Kg2"
+    ) %>%
+    slice(1:40) %>%
+    add_audio_analysis()
+
+emowave3 <-
+    get_playlist_audio_features(
+        "Emo: the third wave",
+        "0k613TUDZYkomz97xX9DeZ"
+    ) %>%
+    slice(1:40) %>%
+    add_audio_analysis()
+
+emowave4 <-
+    get_playlist_audio_features(
+        "Emo: the fourth wave",
+        "3Mck3Ipp6wNmmRgDfYkRza"
+    ) %>%
+    slice(1:40) %>%
+    add_audio_analysis()
+
+wavescombi <-
+  emowave1 %>%
+  mutate(Wave = "wave 1") %>%
+  bind_rows(emowave2 %>% mutate(Wave = "wave 2"),emowave3 %>% mutate(Wave = "wave 3"), emowave4 %>% mutate(Wave = "wave 4"))
+  
+  
+wavescombi %>%
+  mutate(
+    sections =
+      map(
+        sections,                                    # sections or segments
+        summarise_at,
+        vars(tempo, loudness, duration),             # features of interest
+        list(section_mean = mean, section_sd = sd)   # aggregation functions
+      )
+  ) %>%
+  unnest(sections) %>%
+  ggplot(
+    aes(
+      x = tempo,
+      y = tempo_section_sd,
+      colour = Wave,
+      alpha = loudness
+    )
+  ) +
+  geom_point(aes(size = duration / 60)) +
+  geom_rug() +
+  theme_minimal() +
+  ylim(0, 5) +
+  labs(
+    x = "Mean Tempo (bpm)",
+    y = "SD Tempo",
+    colour = "Wave",
+    size = "Duration (min)",
+    alpha = "Volume (dBFS)"
+  )
+```
+
